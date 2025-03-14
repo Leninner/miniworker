@@ -14,9 +14,9 @@ export class CreateCourseDto {
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  code: string;
+  code?: string; // Optional, will be auto-generated if not provided
 
   @IsOptional()
   @IsString()

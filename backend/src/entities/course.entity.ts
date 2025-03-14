@@ -19,7 +19,7 @@ export class Course {
   @Column()
   name: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   code: string;
 
   @Column({ type: 'text', nullable: true })

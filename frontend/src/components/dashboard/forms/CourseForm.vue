@@ -22,15 +22,7 @@
             v-model="form.name"
             required
             placeholder="e.g. Introduction to Computer Science"
-          />
-
-          <FormInput
-            id="code"
-            name="code"
-            label="Course Code"
-            v-model="form.code"
-            required
-            placeholder="e.g. CS101"
+            help-text="The name of the course is required"
           />
 
           <FormTextarea
@@ -38,34 +30,42 @@
             name="description"
             label="Description"
             v-model="form.description"
-            rows="3"
+            :rows="3"
             placeholder="Provide a brief description of the course"
+            help-text="Optional: Add details about the course content and objectives"
           />
 
-          <FormCheckbox
+          <FormGroup :columns="2">
+            <FormInput
+              id="startDate"
+              name="startDate"
+              label="Start Date"
+              type="date"
+              v-model="form.startDate"
+              required
+              help-text="When does the course begin?"
+            />
+
+            <FormInput
+              id="endDate"
+              name="endDate"
+              label="End Date"
+              type="date"
+              v-model="form.endDate"
+              required
+              help-text="When does the course end?"
+            />
+          </FormGroup>
+
+          <FormToggle
             id="active"
-            name="active"
-            label="Active"
+            label="Course Status"
             v-model="form.active"
-          />
-          <p class="mt-1 text-sm text-neutral-500">
-            Active courses are visible to students and allow enrollment
-          </p>
-
-          <FormInput
-            id="startDate"
-            name="startDate"
-            label="Start Date"
-            type="date"
-            v-model="form.startDate"
-          />
-
-          <FormInput
-            id="endDate"
-            name="endDate"
-            label="End Date"
-            type="date"
-            v-model="form.endDate"
+            :help-text="
+              form.active
+                ? 'Course is active and visible to students'
+                : 'Course is inactive and hidden from students'
+            "
           />
 
           <div class="flex justify-end space-x-3">
@@ -91,15 +91,16 @@ import { ref, reactive, defineProps, defineEmits, onMounted } from "vue";
 import {
   Form,
   FormButton,
-  FormCheckbox,
+  FormGroup,
   FormInput,
   FormTextarea,
+  FormToggle,
 } from "@/components/form";
 
 interface Course {
   id?: string;
   name: string;
-  code: string;
+  code?: string;
   description: string;
   active: boolean;
   startDate: string;
@@ -123,7 +124,6 @@ const emit = defineEmits<{
 
 const form = reactive<Course>({
   name: "",
-  code: "",
   description: "",
   active: true,
   startDate: "",

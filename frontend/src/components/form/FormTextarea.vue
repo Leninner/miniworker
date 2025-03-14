@@ -18,7 +18,7 @@
         :required="required"
         :rows="rows"
         :placeholder="placeholder"
-        class="shadow-sm focus:ring-accent-500 focus:border-accent-500 block w-full sm:text-sm border-neutral-300 rounded-md"
+        class="w-full py-2 px-3 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-accent-500"
       ></textarea>
     </div>
     <p v-if="helpText" class="text-sm text-neutral-500">

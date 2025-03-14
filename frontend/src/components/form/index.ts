@@ -5,6 +5,7 @@ import FormErrorMessage from './FormErrorMessage.vue';
 import FormGroup from './FormGroup.vue';
 import FormInput from './FormInput.vue';
 import FormTextarea from './FormTextarea.vue';
+import FormToggle from './FormToggle.vue';
 
 export {
   Form,
@@ -13,5 +14,6 @@ export {
   FormErrorMessage,
   FormGroup,
   FormInput,
-  FormTextarea
+  FormTextarea,
+  FormToggle
 }; 

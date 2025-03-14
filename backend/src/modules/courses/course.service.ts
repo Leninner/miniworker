@@ -27,19 +27,37 @@ export class CourseService {
     private userRepository: Repository<User>,
   ) {}
 
+  /**
+   * Generates a unique course code
+   * Format: PREFIX-RANDOMNUMBER (e.g., CS-12345)
+   */
+  private async generateUniqueCode(): Promise<string> {
+    const prefix = 'CS';
+    let isUnique = false;
+    let code = '';
+
+    while (!isUnique) {
+      // Generate a random 5-digit number
+      const randomNumber = Math.floor(10000 + Math.random() * 90000);
+      code = `${prefix}-${randomNumber}`;
+
+      // Check if this code already exists
+      const existingCourse = await this.courseRepository.findOne({
+        where: { code },
+      });
+
+      if (!existingCourse) {
+        isUnique = true;
+      }
+    }
+
+    return code;
+  }
+
   async create(
     createCourseDto: CreateCourseDto,
     professorId: string,
   ): Promise<Course> {
-    // Check if course with this code already exists
-    const existingCourse = await this.courseRepository.findOne({
-      where: { code: createCourseDto.code },
-    });
-
-    if (existingCourse) {
-      throw new ConflictException('Course with this code already exists');
-    }
-
     // Check if the professor exists
     const professor = await this.userRepository.findOne({
       where: { id: professorId, role: UserRole.PROFESSOR },
@@ -49,6 +67,20 @@ export class CourseService {
       throw new NotFoundException(
         `Professor with ID "${professorId}" not found`,
       );
+    }
+
+    // If code is not provided, generate a unique one
+    if (!createCourseDto.code) {
+      createCourseDto.code = await this.generateUniqueCode();
+    } else {
+      // If code is provided, check if it's unique
+      const existingCourse = await this.courseRepository.findOne({
+        where: { code: createCourseDto.code },
+      });
+
+      if (existingCourse) {
+        throw new ConflictException('Course with this code already exists');
+      }
     }
 
     // Create the course
