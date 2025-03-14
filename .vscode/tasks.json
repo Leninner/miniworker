@@ -1,0 +1,80 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Docker: Start All Services",
+			"type": "shell",
+			"command": "docker compose up -d",
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "Docker: Stop All Services",
+			"type": "shell",
+			"command": "docker compose down",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "Backend: Install Dependencies",
+			"type": "shell",
+			"command": "cd backend && npm install",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "Backend: Start Development",
+			"type": "shell",
+			"command": "cd backend && npm run start:dev",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			},
+			"isBackground": true
+		},
+		{
+			"label": "Frontend: Install Dependencies",
+			"type": "shell",
+			"command": "cd frontend && npm install",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "Frontend: Start Development",
+			"type": "shell",
+			"command": "cd frontend && npm run dev",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			},
+			"isBackground": true
+		},
+		{
+			"label": "Start All (Docker + Backend + Frontend)",
+			"dependsOn": [
+				"Docker: Start All Services",
+				"Backend: Start Development",
+				"Frontend: Start Development"
+			],
+			"problemMatcher": []
+		}
+	]
+}

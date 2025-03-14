@@ -1,0 +1,167 @@
+/* Button variants */
+.btn {
+  @reference px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @reference bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+}
+
+.btn-secondary {
+  @reference bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-blue-500;
+}
+
+.btn-success {
+  @reference bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
+}
+
+.btn-danger {
+  @reference bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+.btn-sm {
+  @reference px-2.5 py-1.5 text-xs rounded;
+}
+
+.btn-lg {
+  @reference px-6 py-3 text-base rounded-md;
+}
+
+.btn-icon {
+  @reference p-2 rounded-full;
+}
+
+.btn-disabled,
+.btn[disabled] {
+  @reference opacity-50 cursor-not-allowed pointer-events-none;
+}
+
+/* Form controls */
+.form-input,
+.form-select,
+.form-textarea {
+  @reference block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm;
+}
+
+.form-checkbox,
+.form-radio {
+  @reference h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500;
+}
+
+.form-error {
+  @reference mt-2 text-sm text-red-600;
+}
+
+.form-hint {
+  @reference mt-2 text-sm text-gray-500;
+}
+
+.form-label {
+  @reference block text-sm font-medium text-gray-700 mb-1;
+}
+
+.form-group {
+  @reference mb-4;
+}
+
+/* Card and containers */
+.card {
+  @reference bg-white shadow overflow-hidden sm:rounded-lg;
+}
+
+.card-header {
+  @reference px-4 py-5 sm:px-6 border-b border-gray-200;
+}
+
+.card-body {
+  @reference px-4 py-5 sm:p-6;
+}
+
+.card-footer {
+  @reference px-4 py-3 sm:px-6 bg-gray-50 border-t border-gray-200;
+}
+
+/* Alert components */
+.alert {
+  @reference p-4 rounded-md;
+}
+
+.alert-info {
+  @reference bg-blue-50 text-blue-700;
+}
+
+.alert-success {
+  @reference bg-green-50 text-green-700;
+}
+
+.alert-warning {
+  @reference bg-yellow-50 text-yellow-700;
+}
+
+.alert-error {
+  @reference bg-red-50 text-red-700;
+}
+
+/* Badge/tags */
+.badge {
+  @reference inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-blue {
+  @reference bg-blue-100 text-blue-800;
+}
+
+.badge-green {
+  @reference bg-green-100 text-green-800;
+}
+
+.badge-red {
+  @reference bg-red-100 text-red-800;
+}
+
+.badge-yellow {
+  @reference bg-yellow-100 text-yellow-800;
+}
+
+.badge-gray {
+  @reference bg-gray-100 text-gray-800;
+}
+
+/* Dividers */
+.divider {
+  @reference border-t border-gray-200 my-4;
+}
+
+.divider-vertical {
+  @reference border-l border-gray-200 mx-4 h-full;
+}
+
+/* Typography utilities */
+.text-truncate {
+  @reference truncate;
+}
+
+.text-muted {
+  @reference text-gray-500;
+}
+
+.heading-1 {
+  @reference text-3xl font-bold text-gray-900;
+}
+
+.heading-2 {
+  @reference text-2xl font-bold text-gray-900;
+}
+
+.heading-3 {
+  @reference text-xl font-bold text-gray-900;
+}
+
+/* Layout utilities */
+.section {
+  @reference py-6;
+}
+
+.container-narrow {
+  @reference max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
+}

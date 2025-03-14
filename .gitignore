@@ -1,0 +1,50 @@
+# compiled output
+/dist
+/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Database
+/pgdata
+
+# Frontend
+frontend/dist
+frontend/node_modules
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Backend
+backend/dist
+backend/node_modules
+backend/.env
+backend/.env.*
+!backend/.env.example 
