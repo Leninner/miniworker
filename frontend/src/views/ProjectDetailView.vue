@@ -106,7 +106,7 @@
                   d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
                 />
               </svg>
-              Chat with Agent
+              Chat with Assistant
             </span>
           </router-link>
 
@@ -269,11 +269,13 @@
                       </ul>
                     </div>
 
-                    <!-- Project Agent -->
+                    <!-- Project Assistant (formerly Agent) -->
                     <div class="text-sm font-medium text-gray-500 mb-2">
-                      <span class="text-gray-800 font-semibold">Agent:</span>
+                      <span class="text-gray-800 font-semibold"
+                        >Assistant:</span
+                      >
                       <span class="text-gray-600 ml-1">{{
-                        project.agent?.name || "Unknown Agent"
+                        project.agent?.name || "Carlos"
                       }}</span>
                     </div>
 
@@ -445,11 +447,11 @@
 
         <!-- Sidebar Information -->
         <div class="md:col-span-1">
-          <!-- Agent Information -->
+          <!-- Assistant Information (formerly Agent Information) -->
           <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-6">
             <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
-                AI Agent
+                Your Assistant
               </h3>
             </div>
             <div class="px-4 py-5 sm:p-0">
@@ -459,7 +461,7 @@
                 >
                   <dt class="text-sm font-medium text-gray-500">Name</dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ project.agent?.name || "Unknown" }}
+                    {{ project.agent?.name || "Carlos" }}
                   </dd>
                 </div>
                 <div
@@ -482,16 +484,29 @@
                           project.agent?.personality === 'challenging',
                       }"
                     >
-                      {{ project.agent?.personality || "Unknown" }}
+                      {{ project.agent?.personality || "Supportive" }}
                     </span>
                   </dd>
                 </div>
                 <div
                   class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                 >
-                  <dt class="text-sm font-medium text-gray-500">Category</dt>
+                  <dt class="text-sm font-medium text-gray-500">Expertise</dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ project.agent?.problemCategory || "Unknown" }}
+                    {{
+                      project.agent?.problemCategory || "Business Automation"
+                    }}
+                  </dd>
+                </div>
+                <div
+                  class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                >
+                  <dt class="text-sm font-medium text-gray-500">About</dt>
+                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    Carlos is your dedicated assistant who specializes in
+                    helping students with business automation projects. He's
+                    patient, knowledgeable, and always ready to provide guidance
+                    when you need it.
                   </dd>
                 </div>
               </dl>

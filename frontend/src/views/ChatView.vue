@@ -206,8 +206,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import MainLayout from "@/components/MainLayout.vue";
-import UserProfileCard from "@/components/UserProfileCard.vue";
+import UserProfileCard from "@/components/user/UserProfileCard.vue";
+import MainLayout from "@/components/layout/AppLayout.vue";
 
 // Mock data for contacts
 const contacts = ref([

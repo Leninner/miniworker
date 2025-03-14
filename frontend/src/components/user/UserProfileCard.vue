@@ -31,20 +31,21 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import Avatar from "./Avatar.vue";
 import UserInfo from "./UserInfo.vue";
-import ActionButtons from "./ActionButtons.vue";
-import SharedSection from "./SharedSection.vue";
-import FileItem from "./FileItem.vue";
-import LinkItem from "./LinkItem.vue";
-import type { User, FileData, LinkData } from "../types/profile";
-
+import type { User } from "@/types";
+import Avatar from "../ui/Avatar.vue";
+import ActionButtons from "../ui/ActionButton.vue";
+import FileItem from "../FileItem.vue";
+import LinkItem from "../LinkItem.vue";
+import type { FileData, LinkData } from "@/types/profile";
 // Mock data
 const user = ref<User>({
   name: "Annette Black",
   role: "Student",
   avatar: "https://randomuser.me/api/portraits/women/67.jpg",
   isOnline: true,
+  email: "annette.black@example.com",
+  id: "1",
 });
 
 const sharedFiles = ref<FileData[]>([
