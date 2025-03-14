@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import type { Course, CourseGroup, CourseQRCode } from '@/types'
 import apiServices from '@/services/api'
+import { useAuthStore } from './auth'
 
 interface CourseState {
   courses: Course[]
@@ -31,10 +32,12 @@ export const useCourseStore = defineStore('course', {
       return state.courseGroups.find(group => group.id === id) || null
     },
     professorCourses: (state) => {
-      return state.courses.filter(course => course.professorId === localStorage.getItem('userId'))
+      const authStore = useAuthStore()
+      return state.courses.filter(course => course.professorId === authStore.user?.id)
     },
     enrolledCourses: (state) => {
-      const userId = localStorage.getItem('userId')
+      const authStore = useAuthStore()
+      const userId = authStore.user?.id
       return state.courses.filter(course => 
         course.students?.some(student => student.id === userId)
       )
@@ -175,6 +178,7 @@ export const useCourseStore = defineStore('course', {
     async enrollSelf(courseId: string) {
       this.loading = true
       this.error = null
+      const authStore = useAuthStore()
       
       try {
         const response = await apiServices.courseService.enrollSelf(courseId)
