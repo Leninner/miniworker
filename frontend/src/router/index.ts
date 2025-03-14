@@ -74,25 +74,25 @@ const router = createRouter({
       path: '/agents',
       name: 'agents',
       component: () => import('../views/AgentsView.vue'),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['professor', 'admin'] }
     },
     {
       path: '/agents/:id',
       name: 'agent-detail',
       component: () => import('../views/AgentDetailView.vue'),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, roles: ['professor', 'admin'] }
     },
     {
       path: '/courses',
       name: 'courses',
       component: () => import('../views/CoursesView.vue'),
-      meta: { requiresAuth: true, roles: ['professor', 'admin'] }
+      meta: { requiresAuth: true, roles: ['student', 'professor', 'admin'] }
     },
     {
       path: '/courses/:id',
       name: 'course-detail',
       component: () => import('../views/CourseDetailView.vue'),
-      meta: { requiresAuth: true, roles: ['professor', 'admin'] }
+      meta: { requiresAuth: true, roles: ['student', 'professor', 'admin'] }
     },
     {
       path: '/enroll/:courseId',
@@ -120,16 +120,16 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const requiresRole = to.matched.some(record => record.meta.roles)
 
-  console.log(to.meta.roles);
-
   if (requiresAuth && !authStore.isAuthenticated) {
     next("/login");
   } else if (
     requiresRole &&
-    to.meta.roles &&
-    !to.meta.roles.includes(authStore.userRole)
+    to.meta.roles && 
+    Array.isArray(to.meta.roles) &&
+    authStore.user?.role &&
+    !to.meta.roles.includes(authStore.user.role)
   ) {
-    next();
+    next("/dashboard");
   } else {
     next();
   }

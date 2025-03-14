@@ -101,6 +101,6 @@ export interface CourseGroup {
 }
 
 export interface CourseQRCode {
-  url: string;
-  expiresAt: Date;
+  qrCodeUrl: string;
+  enrollmentUrl: string;
 } 

@@ -90,13 +90,10 @@
           </div>
           <div v-else-if="qrCode" class="qr-code-container mb-4">
             <img
-              :src="qrCode.url"
+              :src="qrCode.qrCodeUrl"
               alt="Course enrollment QR code"
               class="w-64 h-64"
             />
-            <p class="text-sm text-neutral-500 mt-2">
-              QR Code expires: {{ formatDate(qrCode.expiresAt) }}
-            </p>
           </div>
           <div v-else class="text-center p-4">
             <p class="text-neutral-600">
@@ -287,7 +284,6 @@ import StudentList from "../lists/StudentList.vue";
 import GroupList from "../lists/GroupList.vue";
 import CourseForm from "../forms/CourseForm.vue";
 import GroupForm from "../forms/GroupForm.vue";
-import type { Course, CourseGroup, CourseQRCode as QRCodeType } from "@/types";
 
 // Interface for the CourseForm component
 interface CourseFormData {

@@ -108,7 +108,7 @@ export class CourseService {
   async findByStudent(studentId: string): Promise<Course[]> {
     const student = await this.userRepository.findOne({
       where: { id: studentId },
-      relations: ['enrolledCourses'],
+      relations: ['enrolledCourses', 'enrolledCourses.professor'],
     });
 
     if (!student) {

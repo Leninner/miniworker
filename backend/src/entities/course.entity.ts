@@ -47,7 +47,7 @@ export class Course {
   @Column()
   professorId: string;
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, (user) => user.enrolledCourses)
   @JoinTable({
     name: 'course_students',
     joinColumn: { name: 'courseId', referencedColumnName: 'id' },

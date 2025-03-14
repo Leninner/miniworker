@@ -12,11 +12,10 @@
       <StudentDashboard
         v-if="authStore.isStudent"
         :projects="studentProjects"
-        :agents="availableAgents"
         :loading="isLoading"
         :userId="authStore.user?.id || ''"
+        :useMockData="useMockData"
         @startNewProject="startNewProject()"
-        @startProject="startNewProject"
       />
 
       <!-- Professor View -->
@@ -45,10 +44,11 @@ import StudentDashboard from "@/components/dashboard/views/StudentDashboard.vue"
 import ProfessorDashboard from "@/components/dashboard/views/ProfessorDashboard.vue";
 import AdminDashboard from "@/components/dashboard/views/AdminDashboard.vue";
 
-const { projectService, agentService } = apiService;
+const { projectService } = apiService;
 
 const router = useRouter();
 const authStore = useAuthStore();
+const useMockData = ref(true); // Set to true to use mock data
 
 interface Project {
   id: string;
@@ -66,20 +66,9 @@ interface Project {
   group?: string;
 }
 
-interface Agent {
-  id: string;
-  name: string;
-  personality: string;
-  description: string;
-  problemCategory: string;
-  type?: string;
-  model?: string;
-}
-
 const isLoading = ref(true);
 const studentProjects = ref<Project[]>([]);
 const professorProjects = ref<Project[]>([]);
-const availableAgents = ref<Agent[]>([]);
 
 onMounted(async () => {
   try {
@@ -87,7 +76,12 @@ onMounted(async () => {
 
     // Load appropriate data based on user role
     if (authStore.isStudent) {
-      await Promise.all([fetchStudentProjects(), fetchAvailableAgents()]);
+      if (!useMockData.value) {
+        await fetchStudentProjects();
+      } else {
+        // Simulate API delay
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
     } else if (authStore.isProfessor) {
       await fetchProfessorProjects();
     }
@@ -157,45 +151,8 @@ async function fetchProfessorProjects() {
   }
 }
 
-async function fetchAvailableAgents() {
-  try {
-    const response = await agentService.getAgents();
-    availableAgents.value = response.data;
-  } catch (error) {
-    console.error("Error fetching available agents:", error);
-    // For demo purposes, populate with mock data
-    availableAgents.value = [
-      {
-        id: "1",
-        name: "Business Automation Agent",
-        personality: "analytical",
-        description: "Specializes in business process automation problems",
-        problemCategory: "automation",
-      },
-      {
-        id: "2",
-        name: "Social Innovation Agent",
-        personality: "supportive",
-        description: "Focuses on social innovation challenges",
-        problemCategory: "social",
-      },
-      {
-        id: "3",
-        name: "Technology Disruption Agent",
-        personality: "challenging",
-        description: "Challenges students with cutting-edge tech problems",
-        problemCategory: "technology",
-      },
-    ];
-  }
-}
-
-function startNewProject(agentId?: string) {
-  if (agentId) {
-    router.push(`/projects/new?agent=${agentId}`);
-  } else {
-    router.push("/projects/new");
-  }
+function startNewProject() {
+  router.push("/projects/create");
 }
 
 function generateReports() {

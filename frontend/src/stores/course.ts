@@ -238,6 +238,7 @@ export const useCourseStore = defineStore('course', {
       try {
         const response = await apiServices.courseService.getQRCode(courseId)
         this.qrCode = response.data
+        console.log(this.qrCode, 'lenin')
         return response.data
       } catch (error: any) {
         this.error = error.message || `Failed to get QR code for course with ID ${courseId}`
